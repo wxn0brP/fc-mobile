@@ -41,7 +41,7 @@ jobs:
           echo "repo_name: \"Fusion-chat\"" > fdroid-repo/config.yml
           echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
           echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
-          echo "keystore: \"keystore.p12\"" >> fdroid-repo/config.yml
+          # echo "keystore: \"keystore.p12\"" >> fdroid-repo/config.yml
           echo "keystorepass: \"${{ secrets.KEYSTOREPASS }}\"" >> fdroid-repo/config.yml
           echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
           echo "include:" >> fdroid-repo/config.yml
