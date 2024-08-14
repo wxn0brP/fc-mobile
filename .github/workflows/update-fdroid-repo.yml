@@ -54,6 +54,7 @@ jobs:
       - name: Generate F-Droid Repository
         run: |
           cd fdroid-repo
+          fdroid update --create-key
           fdroid update -c
           fdroid build --all
 
