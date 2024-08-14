@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "${KEYSTORE}" | base64 -d > keystore.p12
 
-       name: Generate config.yml
+      - name: Generate config.yml
         run: |
           mkdir -p fdroid-repo/repo/icons
           echo "repo_name: \"Fusion-chat\"" > fdroid-repo/config.yml
