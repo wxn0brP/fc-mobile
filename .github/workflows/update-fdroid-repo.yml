@@ -54,8 +54,8 @@ jobs:
       - name: Generate F-Droid Repository
         run: |
           cd fdroid-repo
-          fdroid update -c  # Tworzy brakujące metadane
-          fdroid build  # Buduje repozytorium F-Droid
+          fdroid update -c
+          fdroid build --all
 
       - name: Commit and push updates to main
         run: |
