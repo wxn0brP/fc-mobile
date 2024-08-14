@@ -23,6 +23,8 @@ jobs:
           pip install fdroidserver
 
       - name: Download APKs from the latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download -R ${{ github.repository }} -p "*.apk" -D ./fdroid-repo/repo/
 
