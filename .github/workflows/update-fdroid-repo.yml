@@ -26,7 +26,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          gh auth login --with-token <<< "${{ secrets.GH_TOKEN }}"
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
 
       - name: Update F-Droid repo
