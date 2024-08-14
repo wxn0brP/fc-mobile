@@ -35,6 +35,12 @@ jobs:
         run: |
           echo "${KEYSTORE}" | base64 -d > keystore.p12
 
+      - name: Verify keystore
+        run: |
+          ls -l keystore.p12
+          file keystore.p12
+          sha256sum keystore.p12
+
       - name: Generate config.yml
         run: |
           mkdir -p fdroid-repo/repo/icons
@@ -46,6 +52,10 @@ jobs:
           echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
           echo "include:" >> fdroid-repo/config.yml
           echo "  - \"repo/*.apk\"" >> fdroid-repo/config.yml
+
+      - name: Set permissions on config.yml
+        run: |
+          chmod 0600 fdroid-repo/config.yml
 
       - name: Generate F-Droid Repository
         run: |
