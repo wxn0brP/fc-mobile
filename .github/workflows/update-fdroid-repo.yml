@@ -29,10 +29,29 @@ jobs:
         run: |
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
 
-      - name: Update F-Droid repo
+      - name: Decode keystore
+        env:
+          KEYSORE: ${{ secrets.KEYSTORE }}
+        run: |
+          echo "${KEYSTORE}" | base64 -d > keystore.p12
+
+       name: Generate config.yml
+        run: |
+          mkdir -p fdroid-repo/repo/icons
+          echo "repo_name: \"Fusion-chat\"" > fdroid-repo/config.yml
+          echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
+          echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
+          echo "keystore: \"keystore.p12\"" >> fdroid-repo/config.yml
+          echo "keystorepass: \"${{ secrets.KEYSTOREPASS }}\"" >> fdroid-repo/config.yml
+          echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
+          echo "include:" >> fdroid-repo/config.yml
+          echo "  - \"repo/*.apk\"" >> fdroid-repo/config.yml
+
+      - name: Generate F-Droid Repository
         run: |
           cd fdroid-repo
-          fdroid update
+          fdroid update -c  # Tworzy brakujące metadane
+          fdroid build  # Buduje repozytorium F-Droid
 
       - name: Commit and push updates to main
         run: |
