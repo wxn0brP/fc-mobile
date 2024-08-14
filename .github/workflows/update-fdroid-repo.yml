@@ -33,20 +33,12 @@ jobs:
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
           ls -l ./fdroid-repo/repo
 
-
-      # - name: Decode keystore
-      #   env:
-      #     KEYSORE: ${{ secrets.KEYSTORE }}
-      #   run: |
-      #     echo "${KEYSTORE}" | base64 -d > fdroid-repo/keystore.p12
-
       - name: Generate config.yml
         run: |
           mkdir -p fdroid-repo/repo/icons
           echo "repo_name: \"Fusion-chat\"" > fdroid-repo/config.yml
           echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
           echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
-          # echo "keystore: \"keystore.p12\"" >> fdroid-repo/config.yml
           echo "keystorepass: \"${{ secrets.KEYSTOREPASS }}\"" >> fdroid-repo/config.yml
           echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
           echo "include:" >> fdroid-repo/config.yml
@@ -61,12 +53,13 @@ jobs:
           cd fdroid-repo
           fdroid update --create-key
           fdroid update -c
-          
 
       - name: Commit and push updates to main
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Update F-Droid repo for release ${{ github.event.release.tag_name }}"
           git push origin main
