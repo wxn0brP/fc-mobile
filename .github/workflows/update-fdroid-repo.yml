@@ -20,7 +20,7 @@ jobs:
 
       - name: Install fdroidserver
         run: |
-          pip install -U "androguard[magic,GUI]"
+          apt install androguard
           pip install fdroidserver
 
       - name: Download APKs from the latest release
