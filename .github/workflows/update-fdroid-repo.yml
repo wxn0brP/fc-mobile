@@ -1,0 +1,50 @@
+name: Update F-Droid Repo
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install fdroidserver
+        run: |
+          pip install fdroidserver
+
+      - name: Download APKs from the latest release
+        run: |
+          gh release download -R ${{ github.repository }} -p "*.apk" -D ./fdroid-repo/repo/
+
+      - name: Initialize gh-pages branch
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin gh-pages
+          git checkout gh-pages || git checkout --orphan gh-pages
+
+      - name: Update F-Droid repo
+        run: |
+          cd fdroid-repo
+          fdroid update
+
+      - name: Copy files to gh-pages branch
+        run: |
+          mkdir -p ../fdroid-repo
+          cp -r fdroid-repo/* ../fdroid-repo/
+          git add -A
+          git commit -m "Update F-Droid repo for release ${{ github.event.release.tag_name }}"
+
+      - name: Push updates to gh-pages
+        run: |
+          git push origin gh-pages
