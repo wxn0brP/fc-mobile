@@ -31,6 +31,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
+          ls -l ./fdroid-repo/repo
+
 
       # - name: Decode keystore
       #   env:
@@ -59,7 +61,7 @@ jobs:
           cd fdroid-repo
           fdroid update --create-key
           fdroid update -c
-          fdroid build --all
+          
 
       - name: Commit and push updates to main
         run: |
