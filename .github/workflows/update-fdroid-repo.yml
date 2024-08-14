@@ -33,13 +33,7 @@ jobs:
         env:
           KEYSORE: ${{ secrets.KEYSTORE }}
         run: |
-          echo "${KEYSTORE}" | base64 -d > keystore.p12
-
-      - name: Verify keystore
-        run: |
-          ls -l keystore.p12
-          file keystore.p12
-          sha256sum keystore.p12
+          echo "${KEYSTORE}" | base64 -d > fdroid-repo/keystore.p12
 
       - name: Generate config.yml
         run: |
@@ -60,7 +54,6 @@ jobs:
       - name: Generate F-Droid Repository
         run: |
           cd fdroid-repo
-          fdroid update --create-key
           fdroid update -c  # Tworzy brakujące metadane
           fdroid build  # Buduje repozytorium F-Droid
 
