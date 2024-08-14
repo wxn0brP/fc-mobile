@@ -29,11 +29,11 @@ jobs:
         run: |
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
 
-      - name: Decode keystore
-        env:
-          KEYSORE: ${{ secrets.KEYSTORE }}
-        run: |
-          echo "${KEYSTORE}" | base64 -d > fdroid-repo/keystore.p12
+      # - name: Decode keystore
+      #   env:
+      #     KEYSORE: ${{ secrets.KEYSTORE }}
+      #   run: |
+      #     echo "${KEYSTORE}" | base64 -d > fdroid-repo/keystore.p12
 
       - name: Generate config.yml
         run: |
