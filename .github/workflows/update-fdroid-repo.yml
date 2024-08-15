@@ -38,12 +38,12 @@ jobs:
           mkdir -p fdroid-repo/repo/icons
           echo "repo_author: \"wxn0brP\"" > fdroid-repo/config.yml
           echo "repo_icon: \"fdroid-repo/repo/icons/icon.png\"" >> fdroid-repo/config.yml
-          echo "repo_name: \"Fusion-chat\"" > fdroid-repo/config.yml
+          echo "repo_name: \"Fusion-chat\"" >> fdroid-repo/config.yml
           echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
           echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
           echo "keystorepass: \"${{ secrets.KEYSTOREPASS }}\"" >> fdroid-repo/config.yml
           echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
-          echo "repo_url: \""https://wxn0brP.github.io/fc-mobile/repo\"" >> fdroid-repo/config.yml
+          echo "repo_url: \"https://wxn0brP.github.io/fc-mobile/repo\"" >> fdroid-repo/config.yml
           echo "include:" >> fdroid-repo/config.yml
           echo "  - \"repo/*.apk\"" >> fdroid-repo/config.yml
 
