@@ -1,10 +1,8 @@
 #!/bin/bash
-mkdir -p fdroid-repo/repo/icons
-mkdir -p fdroid-repo/metadata
-
 cp icon.png fdroid-repo
 cp icon.png fdroid-repo/repo/icons/com.fusionchat.png
 
+touch fdroid-repo/config.yml
 cat <<EOF > fdroid-repo/config.yml
 repo_author: "wxn0brP"
 repo_name: "Fusion-chat"
@@ -19,6 +17,7 @@ include:
 EOF
 chmod 0600 fdroid-repo/config.yml
 
+touch fdroid-repo/metadata/com.fusionchat.yml
 cat <<EOL > fdroid-repo/metadata/com.fusionchat.yml
 License: MIT
 WebSite: https://fusion.ct8.pl

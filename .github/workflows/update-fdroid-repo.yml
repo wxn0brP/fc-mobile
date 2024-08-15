@@ -25,6 +25,14 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install -y fdroidserver
+      
+      - name: Setup dir
+        run: |
+          rm -rf repo
+          rm -rf fdroid-repo
+          mkdir -p repo
+          mkdir -p fdroid-repo/repo/icons
+          mkdir -p fdroid-repo/metadata
 
       - name: Download APKs from the latest release
         env:
@@ -53,8 +61,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rm -rf repo
-          mkdir repo
           cp -r fdroid-repo/repo/* repo/
           git add repo
           git commit -m "Update F-Droid repo for release ${{ github.event.release.tag_name }}"
