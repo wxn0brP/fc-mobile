@@ -60,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cd fdroid-repo
+          cp -r fdroid-repo/repo/* repo
           git add repo
           git commit -m "Update F-Droid repo for release ${{ github.event.release.tag_name }}"
           git push origin main --force
