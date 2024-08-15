@@ -63,6 +63,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf repo
           mkdir repo
           cp -r fdroid-repo/repo/* repo/
           git add repo
