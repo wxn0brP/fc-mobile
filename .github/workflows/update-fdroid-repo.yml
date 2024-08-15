@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p fdroid-repo/repo/icons
           echo "repo_author: \"wxn0brP\"" > fdroid-repo/config.yml
-          echo "repo_icon: \"fdroid-repo/repo/icons/icon.png\"" >> fdroid-repo/config.yml
+          echo "repo_icon: \"repo/icons/icon.png\"" >> fdroid-repo/config.yml
           echo "repo_name: \"Fusion-chat\"" >> fdroid-repo/config.yml
           echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
           echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
