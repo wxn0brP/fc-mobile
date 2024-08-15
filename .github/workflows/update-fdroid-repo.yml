@@ -33,22 +33,13 @@ jobs:
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D ./fdroid-repo/repo/
           ls -l ./fdroid-repo/repo
 
-      - name: Generate config.yml
+      - name: Generate config and setup repo
         run: |
-          mkdir -p fdroid-repo/repo/icons
-          echo "repo_author: \"wxn0brP\"" > fdroid-repo/config.yml
-          echo "repo_name: \"Fusion-chat\"" >> fdroid-repo/config.yml
-          echo "repo_description: \"Fusion chat\"" >> fdroid-repo/config.yml
-          echo "repo_keyalias: \"${{ secrets.REPO_KEYALIAS }}\"" >> fdroid-repo/config.yml
-          echo "keystorepass: \"${{ secrets.KEYSTOREPASS }}\"" >> fdroid-repo/config.yml
-          echo "keypass: \"${{ secrets.KEYPASS }}\"" >> fdroid-repo/config.yml
-          echo "repo_url: \"https://wxn0brP.github.io/fc-mobile/repo\"" >> fdroid-repo/config.yml
-          echo "include:" >> fdroid-repo/config.yml
-          echo "  - \"repo/*.apk\"" >> fdroid-repo/config.yml
-
-      - name: Set permissions on config.yml
-        run: |
-          chmod 0600 fdroid-repo/config.yml
+          chmod +x generate-config.sh
+          REPO_KEYALIAS=${{ secrets.REPO_KEYALIAS }} \
+          KEYSTOREPASS=${{ secrets.KEYSTOREPASS }} \
+          KEYPASS=${{ secrets.KEYPASS }} \
+          ./generate-config.sh
 
       - name: Generate F-Droid Repository
         run: |
