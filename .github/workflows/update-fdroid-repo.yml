@@ -25,14 +25,20 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install -y fdroidserver
+
+      - name: Update git
+        run: |
+          git fetch
+          git checkout main
+          git reset --hard HEAD
+          git pull
       
       - name: Setup dir
         run: |
-          rm -rf repo
           rm -rf fdroid-repo
-          mkdir -p repo
-          mkdir -p fdroid-repo/repo/icons
           mkdir -p fdroid-repo/metadata
+
+          cp -r repo fdroid-repo
 
       - name: Download APKs from the latest release
         env:
