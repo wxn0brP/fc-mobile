@@ -44,3 +44,5 @@ Categories:
   - Utilities
 
 EOL
+
+echo "${KEYSTORE_P12_FILE}" | base64 --decode > fdroid-repo/keystore.p12

@@ -48,11 +48,13 @@ jobs:
           ls -l ./fdroid-repo/repo
 
       - name: Generate config and setup repo
+        env:
+          REPO_KEYALIAS: ${{ secrets.REPO_KEYALIAS }}
+          KEYSTOREPASS: ${{ secrets.KEYSTOREPASS }}
+          KEYPASS: ${{ secrets.KEYPASS }}
+          KEYSTORE_P12_FILE: ${{ secrets.KEYSTORE_P12_FILE }}
         run: |
           chmod +x generate-config.sh
-          REPO_KEYALIAS=${{ secrets.REPO_KEYALIAS }} \
-          KEYSTOREPASS=${{ secrets.KEYSTOREPASS }} \
-          KEYPASS=${{ secrets.KEYPASS }} \
           ./generate-config.sh
 
       - name: Generate F-Droid Repository
