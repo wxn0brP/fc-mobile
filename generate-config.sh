@@ -45,4 +45,4 @@ Categories:
 
 EOL
 
-echo "${KEYSTORE_P12_FILE}" | base64 --decode > fdroid-repo/keystore.p12
+# echo "${KEYSTORE_P12_FILE}" | base64 --decode > fdroid-repo/keystore.p12
