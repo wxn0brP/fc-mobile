@@ -1,9 +1,9 @@
 {
-  "/etc/issue.net": "Ubuntu 22.04.4 LTS",
+  "/etc/issue.net": "Ubuntu 22.04.5 LTS",
   "commandLine": [
     "/usr/bin/fdroid update",
     "-c"
   ],
-  "startTimestamp": 1725724025000,
+  "startTimestamp": 1730999584000,
   "subcommand": "update"
 }
