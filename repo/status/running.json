@@ -4,6 +4,27 @@
     "/usr/bin/fdroid update",
     "-c"
   ],
-  "startTimestamp": 1731009459000,
+  "fdroiddata": {
+    "commitId": "cdfd8c92b0f11cdefbd6a6b1ad81f231e5c56871",
+    "isDirty": true,
+    "modifiedFiles": [
+      "repo/index-v1.jar",
+      "repo/index-v1.json",
+      "repo/index.html",
+      "repo/index.jar",
+      "repo/index.png",
+      "repo/index.xml",
+      "repo/status/running.json",
+      "repo/status/update.json"
+    ],
+    "untrackedFiles": [
+      "repo/fusion_chat-arm64-v8a-v0.0.6.apk",
+      "repo/fusion_chat-armeabi-v7a-v0.0.6.apk",
+      "repo/fusion_chat-universal-v0.0.6.apk",
+      "repo/fusion_chat-x86-v0.0.6.apk",
+      "repo/fusion_chat-x86_64-v0.0.6.apk"
+    ]
+  },
+  "startTimestamp": 1731079826000,
   "subcommand": "update"
 }
