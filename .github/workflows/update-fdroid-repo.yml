@@ -6,10 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  installation:
+  update-repo:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
       - name: Set up Python environment
         uses: actions/setup-python@v4
         with:
@@ -23,14 +28,6 @@ jobs:
           sudo apt update
           sudo apt-get install -y fdroidserver
 
-  setup-repo:
-    needs: installation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Update git
         run: |
           git fetch
@@ -38,24 +35,12 @@ jobs:
           git reset --hard HEAD
           git pull
 
-  download-apks:
-    needs: setup-repo
-    runs-on: ubuntu-latest
-    steps:
       - name: Download APKs from the latest release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download -R wxn0brP/fc-mobile -p "*.apk" -D repo
 
-  update-and-push:
-    needs: download-apks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Set up repo secrets
         run: |
           echo "${{ secrets.KEYSTORE_P12 }}" | base64 -d - > keystore.p12
