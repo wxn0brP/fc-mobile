@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2.0.10
+        uses: android-actions/setup-android@v3.2.2
 
       - name: Install fdroidserver
         run: |
